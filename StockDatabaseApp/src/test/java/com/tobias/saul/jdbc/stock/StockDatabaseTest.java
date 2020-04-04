@@ -42,7 +42,12 @@ public class StockDatabaseTest {
 		int quantity = 0;
 		BigDecimal price = new BigDecimal(0.00);
 		
+		stock = sf.createStock(symbol, quantity, price);
 		
+		assertEquals(StockFactory.getStockId(), stock.getStockId());
+		assertEquals(symbol, stock.getSymbol());
+		assertEquals(quantity, stock.getQuantity());
+		assertEquals(price, stock.getPrice());
 	}
 
 }

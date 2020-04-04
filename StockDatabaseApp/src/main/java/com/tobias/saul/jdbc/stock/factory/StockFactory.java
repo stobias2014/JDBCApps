@@ -1,5 +1,7 @@
 package com.tobias.saul.jdbc.stock.factory;
 
+import java.math.BigDecimal;
+
 import com.tobias.saul.jdbc.stock.pojos.Stock;
 
 public class StockFactory {
@@ -14,6 +16,12 @@ public class StockFactory {
 		stockId++;
 		Stock stock = new Stock(stockId);
 		
+		return stock;
+	}
+
+	public Stock createStock(String symbol, int quantity, BigDecimal price) {
+		stockId++;
+		Stock stock = new Stock(stockId, symbol, quantity, price);
 		return stock;
 	}
 
