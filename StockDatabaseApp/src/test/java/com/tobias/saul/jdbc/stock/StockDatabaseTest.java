@@ -7,17 +7,20 @@ import java.math.BigDecimal;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import com.tobias.saul.jdbc.stock.dao.StockDao;
 import com.tobias.saul.jdbc.stock.factory.StockFactory;
 import com.tobias.saul.jdbc.stock.pojos.Stock;
 
 public class StockDatabaseTest {
 	
 	static StockFactory sf;
+	static StockDao stockDao;
 	Stock stock;
 	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		sf = new StockFactory();
+		stockDao = new StockDao();
 	}
 	
 	
@@ -48,6 +51,15 @@ public class StockDatabaseTest {
 		assertEquals(symbol, stock.getSymbol());
 		assertEquals(quantity, stock.getQuantity());
 		assertEquals(price, stock.getPrice());
+	}
+	
+	@Test
+	public void test_AddStockToDatabase() {
+		stock = sf.createStock();
+		
+		stockDao.add(stock);
+		
+		assertEquals(stockDao.get(stock.getStockId()), stock);
 	}
 
 }
