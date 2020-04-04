@@ -1,0 +1,22 @@
+package com.tobias.saul.jdbc.stock;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+import com.tobias.saul.jdbc.stock.factory.StockFactory;
+import com.tobias.saul.jdbc.stock.pojos.Stock;
+
+public class StockDatabaseTest {
+	
+	@Test
+	public void test_WhenCreateStockCalled_CreateStockObjectWithMatchingIDToStockFactory() {
+		StockFactory sf = new StockFactory();
+		Stock stock;
+		
+		stock = sf.createStock();
+		
+		assertEquals(StockFactory.getStockId(), stock.getStockId());
+	}
+
+}

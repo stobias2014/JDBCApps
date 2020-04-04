@@ -1,0 +1,10 @@
+package com.tobias.saul.jdbc.stock.pojos;
+
+public class Stock {
+
+	public Object getStockId() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

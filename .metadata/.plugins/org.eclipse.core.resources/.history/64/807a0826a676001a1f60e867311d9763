@@ -1,0 +1,21 @@
+package com.tobias.saul.jdbc.stock;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+public class StockDatabaseTest {
+
+	@Test
+	public void test() {
+		fail("Not yet implemented");
+	}
+	
+	@Test
+	public void test_CreateStockObject() {
+		StockFactory sf = new StockFactory();
+		
+		sf.createStock();
+	}
+
+}

@@ -1,0 +1,17 @@
+package com.tobias.saul.jdbc.stock.factory;
+
+import com.tobias.saul.jdbc.stock.pojos.Stock;
+
+public class StockFactory {
+
+	public Stock createStock() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Stock createStock() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

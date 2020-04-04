@@ -1,0 +1,20 @@
+package com.tobias.saul.jdbc.stock.factory;
+
+import com.tobias.saul.jdbc.stock.pojos.Stock;
+
+public class StockFactory {
+	
+	private static long stockId = 0;
+
+	public Stock createStock() {
+		Stock stock = new Stock(stockId);
+		stockId++;
+		return stock;
+	}
+
+	public static Object getStockId() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

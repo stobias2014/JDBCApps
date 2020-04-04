@@ -1,0 +1,16 @@
+package com.tobias.saul.jdbc.stock.pojos;
+
+public class Stock {
+	
+	private long stockId;
+
+	public Stock(long stockId) {
+		// TODO Auto-generated constructor stub
+	}
+
+	public Object getStockId() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}
