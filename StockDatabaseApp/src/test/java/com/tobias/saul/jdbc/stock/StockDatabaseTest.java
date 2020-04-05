@@ -3,6 +3,7 @@ package com.tobias.saul.jdbc.stock;
 import static org.junit.Assert.*;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -60,6 +61,33 @@ public class StockDatabaseTest {
 		stockDao.add(stock);
 		
 		assertEquals(stockDao.get(stock.getStockId()), stock);
+	}
+	
+	@Test
+	public void test_DeleteStockFromDatabase() {
+		stock = sf.createStock();
+		
+		stockDao.add(stock);
+		
+		stockDao.delete(stock.getStockId());
+		
+		assertNull(stockDao.get(stock.getStockId()));
+	}
+	
+	@Test
+	public void test_GetAllStocksWithSameSymbol() {
+		stock = sf.createStock("aaa", 3, new BigDecimal(4.5));
+		Stock stock1 = sf.createStock("bbb", 5, new BigDecimal(3.3));
+		Stock stock2 = sf.createStock("aaa", 4, new BigDecimal(2.3));
+		
+		stockDao.add(stock);
+		stockDao.add(stock1);
+		stockDao.add(stock2);
+		
+		ArrayList<Stock> stocks = stockDao.get("aaa");
+		
+		assertTrue(stocks.contains(stockDao.get(stock2.getStockId())));
+		
 	}
 
 }

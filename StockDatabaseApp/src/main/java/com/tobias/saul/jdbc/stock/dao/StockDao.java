@@ -6,6 +6,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import com.tobias.saul.jdbc.stock.pojos.Stock;
 
@@ -119,6 +120,108 @@ public class StockDao {
 		}
 		
 		return stock;
+	}
+
+
+	public void delete(long stockId) {
+		PreparedStatement ps = null;
+		
+		try {
+			conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+			
+			String sql = "DELETE FROM stock WHERE stockId = ?";
+			ps = conn.prepareStatement(sql);
+			
+			ps.setLong(1, stockId);
+			
+			ps.execute();
+			
+			ps.close();
+			conn.close();
+			
+		} catch (SQLException se) {
+			se.printStackTrace();
+		} finally {
+			try {
+				if (ps != null) {
+					ps.close();
+				}
+			} catch (SQLException se) {
+				se.printStackTrace();
+			}
+			
+			try {
+				if (conn != null) {
+					conn.close();
+				}
+			} catch (SQLException se) {
+				se.printStackTrace();
+			}
+		}
+		
+	}
+
+
+	public ArrayList<Stock> get(String symbol) {
+		ArrayList<Stock> stocks = null;
+		Stock stock = null;
+		PreparedStatement ps = null;
+		
+		try {
+			conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+			stocks = new ArrayList<Stock>();
+			stock = new Stock();
+			
+			String sql = "SELECT stockId, symbol, quantity, price FROM stock WHERE symbol = ?";
+			
+			ps = conn.prepareStatement(sql);
+			
+			ps.setString(1, symbol);
+			
+			ResultSet rs = ps.executeQuery();
+			
+			
+			while(rs.next()) {
+				long id = rs.getLong("stockId");
+				String s = rs.getString("symbol");
+				int quantity = rs.getInt("quantity");
+				BigDecimal price = rs.getBigDecimal("price");
+				
+				stock = new Stock(id, s, quantity, price);
+				
+				stock.setStockId(id);
+				stock.setSymbol(s);
+				stock.setQuantity(quantity);
+				stock.setPrice(price);
+				
+				stocks.add(stock);
+			}
+			
+			rs.close();
+			ps.close();
+			conn.close();
+			
+		} catch (SQLException se) {
+			se.printStackTrace();
+		} finally {
+			try {
+				if (ps != null) {
+					ps.close();
+				}
+			} catch (SQLException se) {
+				se.printStackTrace();
+			}
+			
+			try {
+				if (conn != null) {
+					conn.close();
+				}
+			} catch (SQLException se) {
+				se.printStackTrace();
+			}
+		}
+		
+		return stocks;
 	}
 
 }

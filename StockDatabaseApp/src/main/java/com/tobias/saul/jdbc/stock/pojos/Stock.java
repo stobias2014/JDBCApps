@@ -20,6 +20,14 @@ public class Stock {
 		this.price = price;
 	}
 
+	public Stock() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public void setStockId(long stockId) {
+		this.stockId = stockId;
+	}
+
 	public long getStockId() {
 		return this.stockId;
 	}
