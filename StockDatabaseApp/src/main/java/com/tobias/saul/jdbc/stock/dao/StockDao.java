@@ -224,4 +224,46 @@ public class StockDao {
 		return stocks;
 	}
 
+
+	public void update(long stockId, String symbol) {
+		PreparedStatement ps = null;
+		
+		try {
+			conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+			
+			String sql = "UPDATE stock SET symbol = ? WHERE stockId = ?";
+			ps = conn.prepareStatement(sql);
+			
+			ps.setString(1, symbol);
+			ps.setLong(2, stockId);
+			
+			ps.execute();
+			
+			ps.close();
+			conn.close();
+			
+		} catch (SQLException se) {
+			se.printStackTrace();
+		} finally {
+			try {
+				if (ps != null) {
+					ps.close();
+				}
+			} catch (SQLException se) {
+				se.printStackTrace();
+			}
+			
+			try {
+				if (conn != null) {
+					conn.close();
+				}
+			} catch (SQLException se) {
+				se.printStackTrace();
+			}
+		}
+		
+	}
+	
+	
+
 }

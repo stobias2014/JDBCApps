@@ -89,5 +89,18 @@ public class StockDatabaseTest {
 		assertTrue(stocks.contains(stockDao.get(stock2.getStockId())));
 		
 	}
+	
+	@Test
+	public void test_UpdateStockSymbol() {
+		stock = sf.createStock("aa", 34, new BigDecimal(5.6));
+		
+		stockDao.add(stock);
+		
+		stock = stockDao.get(stock.getStockId());
+		
+		stockDao.update(stock.getStockId(), "aaa");
+		
+		assertEquals("aaa", stockDao.get(stock.getStockId()).getSymbol());
+	}
 
 }
